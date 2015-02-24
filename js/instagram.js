@@ -14,6 +14,7 @@ var Tags = {
     submitButton: function() {
         $('#press').click(function() {
             $('#andela').html('');
+            $('#get').empty();
             var image = $('#get').val();
             Tags.apiRequest(image);
           });
@@ -36,30 +37,40 @@ var Tags = {
               dataType: 'jsonp',
 
               success: function(data, status) {
+                var display= data.data.length;
+                //console.log(display);
+                 if(display === 0){
+                   $("#andela").append("<p>NOT FOUND</p>");
+                 }
+                 if(display > 0){
+                  //console.log(display);
+                 
                 $.each(data.data, function(i, image) {
                   var show = data.data[i].images.low_resolution.url;
-                      var check = data.data[i].comments.data;
-                      if (check.length >= 1) {
-                        check = check[0].text;
-                        $('#andela').append("<li class='col-md-3'><p class='text'>" + check + "</p><img src=" + show + "></li>");
-                      }
-                       else {
-                        $('#andela').append("<li class='col-md-3'><p class='text'>No comment</p><img src=" + show + "></li>");
-
-                        }
-                      });
-
-                    },
-
-                    error: function() {
-                      $('#andela').html("<p>Not found</p>");
+                  var check = data.data[i].comments.data;
+                  console.log(data);
+                    if (check.length >= 1) {
+                      check = check[0].text;
+                      $('#andela').append("<li class='col-md-3'><p class='text'>" + check + "</p><img src=" + show + "></li>");
                     }
+                    else {
+                      $('#andela').append("<li class='col-md-3'><p class='text'>No comment</p><img src=" + show + "></li>");
 
-                  });
-              }
-  
+                    }
+                 });
+                }
+               },
+
+
+              error: function() {
+                $('#andela').html("<p>NOT FOUND</p>");
+                }
+
+             });
           }
-      
+
+      }
+
  $(document).ready(function() {
   Tags.init();
 });

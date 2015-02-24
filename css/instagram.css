@@ -8,8 +8,7 @@
   width:100%;
   height: 100%;
   font-family: 'Bitter', serif;
-  font-size: 2em;
-  font-size: 3em;
+  font-size: 1em;
   margin: 0 auto;
 }
 
@@ -20,10 +19,10 @@
   -moz-transition:opacity 2s linear2
 }
 
-img:hover{
+/*img:hover{
   opacity:0.2;
   -moz-transition:opacity 2s linear;
-}
+}*/
 img{
   transition:opacity 5s linear;
   -webkit-transition: opacity 5s linear;
